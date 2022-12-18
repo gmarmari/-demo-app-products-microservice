@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  products:
+    build: .
+    image: "demo-app-products"
+    container_name: demo-app-products
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://products-database:5432/george"
+      SPRING_DATASOURCE_USERNAME: "george"
+      SPRING_DATASOURCE_PASSWORD: "54321"
+    volumes:
+      - "./log:/app/log"
+    ports:
+      - "8002:8002"
+    depends_on:
+      - products-database
+
+  products-database:
+    image: "postgres:14.5-alpine"
+    container_name: products-database
+    restart: "unless-stopped"
+    volumes:
+      - "db-data:/val/lib/postgres/data"
+    environment:
+      POSTGRES_USER: "george"
+      POSTGRES_PASSWORD: "54321"
+    ports:
+      - "5432:5432"
+
+volumes:
+  db-data:

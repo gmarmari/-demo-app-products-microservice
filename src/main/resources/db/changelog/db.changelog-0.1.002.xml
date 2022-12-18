@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="gmarmari" id="changelog-0.1.002">
+        <comment>add some demo products</comment>
+
+        <insert tableName="products">
+            <column name="name" value="Bio Tee mint (30 pieces)"/>
+            <column name="amount" value="1"/>
+            <column name="prize" value="4.50-EURO"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Bio Milk 1 lt"/>
+            <column name="amount" value="2"/>
+            <column name="prize" value="1.50-EURO"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Bread 500 grams"/>
+            <column name="amount" value="1"/>
+            <column name="prize" value="2.50-EURO"/>
+        </insert>
+
+        <insert tableName="product_info">
+            <column name="product_id" value="1"/>
+            <column name="size" value="50.000-GRAMS"/>
+            <column name="country_of_origin" value="China"/>
+            <column name="description" value="The perfect tee to ease cold and flu symptoms"/>
+        </insert>
+
+        <insert tableName="product_info">
+            <column name="product_id" value="2"/>
+            <column name="size" value="1.000-LITER"/>
+            <column name="country_of_origin" value="Germany"/>
+            <column name="description" value="Milk made from raw milk subjected to pasteurization and refrigeration."/>
+        </insert>
+
+        <insert tableName="product_info">
+            <column name="product_id" value="3"/>
+            <column name="size" value="500.000-GRAMS"/>
+            <column name="country_of_origin" value="England"/>
+            <column name="description" value="Slightly moist, tender and Moist, tender and light Soft, springy texture, flaky crumb, with a medium crumb, with medium fine, tender and slightly moist fine grain. evenly distributed air with fine grain, thin- spaces."/>
+        </insert>
+
+        <insert tableName="product_contact">
+            <column name="product_id" value="1"/>
+            <column name="name" value="The maker"/>
+            <column name="address" value="Hong kong, China"/>
+        </insert>
+
+        <insert tableName="product_contact">
+            <column name="product_id" value="2"/>
+            <column name="name" value="Milk maker"/>
+            <column name="address" value="Berchtesgaden, Germany"/>
+            <column name="tel" value="089 888 888"/>
+            <column name="email" value="milk.berchtesgaden@example.de"/>
+            <column name="website" value="www.milk.berchtesgaden.de"/>
+        </insert>
+
+        <insert tableName="product_contact">
+            <column name="product_id" value="3"/>
+            <column name="name" value="The Bakery"/>
+            <column name="address" value="London, England"/>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
+
