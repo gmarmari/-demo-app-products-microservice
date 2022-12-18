@@ -55,6 +55,26 @@ class ProductUseCaseTest {
     }
 
     @Test
+    void getProductsFromIds() {
+        // Given
+        List<Long> ids = List.of(1L,2L,3L);
+        ProductDao productA = aProductDao(true);
+        ProductDao productB = aProductDao(true);
+        ProductDao productC = aProductDao(true);
+
+        when(productRepository.findAllById(ids)).thenReturn(List.of(productA, productB, productC));
+
+        // When
+        List<ProductDao> list = useCase.getProductsFromIds(ids);
+
+        // Then
+        assertThat(list).containsExactly(productA, productB, productC);
+        verifyNoMoreInteractions(productRepository);
+        verifyNoInteractions(productInfoRepository);
+        verifyNoInteractions(productContactRepository);
+    }
+
+    @Test
     void getProduct() {
         // Given
         ProductDao product = aProductDao();

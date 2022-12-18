@@ -28,6 +28,11 @@ public class ProductRestController implements ProductsAPi {
     }
 
     @Override
+    public List<ProductDto> getProductsFromIds(String productIds) {
+        return adapter.getProductsFromIds(productIds);
+    }
+
+    @Override
     public ProductDto getProductById(long productId) {
         return adapter.getProduct(productId)
                 .orElseThrow(ProductNotFoundException::new);

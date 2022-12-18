@@ -52,6 +52,22 @@ class ProductRestControllerTest {
     }
 
     @Test
+    void getProductsFromIds() throws Exception {
+        // Given
+        String productIds = "1,2";
+        List<ProductDto> list = List.of(aProductDto(), aProductDto());
+        when(adapter.getProductsFromIds(productIds)).thenReturn(list);
+
+        // When
+        ResultActions resultActions = mockMvc.perform(get("/from-ids/{productIds}", productIds));
+
+        // Then
+        resultActions.andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(objectMapper.writeValueAsString(list)));
+    }
+
+    @Test
     void getProductById() throws Exception {
         // Given
         long productId = aLong();

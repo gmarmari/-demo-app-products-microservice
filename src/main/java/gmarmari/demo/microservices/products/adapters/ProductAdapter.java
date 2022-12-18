@@ -7,6 +7,7 @@ import gmarmari.demo.microservices.products.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,6 +25,13 @@ public class ProductAdapter {
 
     public List<ProductDto> getProducts() {
         return service.getProducts().stream()
+                .map(this::convert)
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductDto> getProductsFromIds(String productIds) {
+        List<Long> ids = Arrays.stream(productIds.split(",")).map(Long::parseLong).collect(Collectors.toList());
+        return service.getProductsFromIds(ids).stream()
                 .map(this::convert)
                 .collect(Collectors.toList());
     }
