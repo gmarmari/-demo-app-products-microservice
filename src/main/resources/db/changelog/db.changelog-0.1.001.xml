@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="gmarmari" id="changelog-0.1.001">
+        <comment>create product tables</comment>
+
+        <createTable tableName="products">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="int" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="prize" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="product_info">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="product_id" type="int">
+                <constraints foreignKeyName="fk_product_info_product_id"
+                             referencedTableName="products" referencedColumnNames="id"
+                             nullable="false" unique="true" />
+            </column>
+            <column name="size" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_of_origin" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(1000)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="product_contact">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="product_id" type="int">
+                <constraints foreignKeyName="fk_product_contact_product_id"
+                             referencedTableName="products" referencedColumnNames="id"
+                             nullable="false" unique="true" />
+            </column>
+            <column name="name" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tel" type="varchar(32)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="email" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="website" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+</databaseChangeLog>
+
