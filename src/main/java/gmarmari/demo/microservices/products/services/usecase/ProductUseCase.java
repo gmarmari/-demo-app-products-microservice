@@ -38,6 +38,11 @@ public class ProductUseCase implements ProductService {
     }
 
     @Override
+    public List<ProductDao> getProductsFromIds(List<Long> productIds) {
+        return productRepository.findAllById(productIds);
+    }
+
+    @Override
     public Optional<ProductDao> getProduct(long productId) {
         return productRepository.findById(productId);
     }

@@ -12,6 +12,8 @@ public interface ProductService {
 
     List<ProductDao> getProducts();
 
+    List<ProductDao> getProductsFromIds(List<Long> productIds);
+
     Optional<ProductDao> getProduct(long productId);
 
 

@@ -57,6 +57,29 @@ class ProductAdapterTest {
     }
 
     @Test
+    void getProductsFromIds() {
+        // Given
+        String ids = "1,2,3";
+        ProductDao daoA = aProductDao(true);
+        ProductDao daoB = aProductDao(true);
+        ProductDao daoC = aProductDao(true);
+
+        when(service.getProductsFromIds(List.of(1L,2L,3L))).thenReturn(List.of(daoA, daoB, daoC));
+
+        // When
+        List<ProductDto> list = adapter.getProductsFromIds(ids);
+
+        // Then
+        assertThat(list).hasSize(3);
+        verifyProduct(list.get(0), daoA);
+        verifyProduct(list.get(1), daoB);
+        verifyProduct(list.get(2), daoC);
+
+        verifyNoMoreInteractions(service);
+    }
+
+
+    @Test
     void getProduct() {
         // Given
         long productId = aLong();

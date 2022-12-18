@@ -1,6 +1,7 @@
 package gmarmari.demo.microservices.products.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -20,6 +21,16 @@ public interface ProductsAPi {
             description = "List of products"
     )
     List<ProductDto> getProducts();
+
+    @GetMapping(path = "/from-ids/{productIds}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(
+            parameters = {
+                    @Parameter(name = "productIds", description = "comma separated ids, for e.g. 1,2,3")
+            },
+            description = "List of products from the given product ids"
+    )
+    List<ProductDto> getProductsFromIds(@PathVariable("productIds") String productIds);
+
 
     @GetMapping(path = "/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
