@@ -16,7 +16,7 @@ services:
     volumes:
       - "./log:/app/log"
     ports:
-      - "8002:8080"
+      - "8002:8002"
     depends_on:
       - products-database
 
