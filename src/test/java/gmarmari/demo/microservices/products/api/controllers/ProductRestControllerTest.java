@@ -43,7 +43,7 @@ class ProductRestControllerTest {
         when(adapter.getProducts()).thenReturn(list);
 
         // When
-        ResultActions resultActions = mockMvc.perform(get("/"));
+        ResultActions resultActions = mockMvc.perform(get("/products"));
 
         // Then
         resultActions.andExpect(status().isOk())
@@ -59,7 +59,7 @@ class ProductRestControllerTest {
         when(adapter.getProductsFromIds(productIds)).thenReturn(list);
 
         // When
-        ResultActions resultActions = mockMvc.perform(get("/from-ids/{productIds}", productIds));
+        ResultActions resultActions = mockMvc.perform(get("/products/from-ids/{productIds}", productIds));
 
         // Then
         resultActions.andExpect(status().isOk())
@@ -75,7 +75,7 @@ class ProductRestControllerTest {
         when(adapter.getProduct(productId)).thenReturn(Optional.of(dto));
 
         // When
-        ResultActions resultActions = mockMvc.perform(get("/{id}", productId));
+        ResultActions resultActions = mockMvc.perform(get("/products/{id}", productId));
 
         // Then
         resultActions.andExpect(status().isOk())
@@ -90,7 +90,7 @@ class ProductRestControllerTest {
         when(adapter.getProduct(productId)).thenReturn(Optional.empty());
 
         // When
-        ResultActions resultActions = mockMvc.perform(get("/{productId}", productId));
+        ResultActions resultActions = mockMvc.perform(get("/products/{productId}", productId));
 
         // Then
         resultActions.andExpect(status().isNotFound());
@@ -104,7 +104,7 @@ class ProductRestControllerTest {
         when(adapter.getProductDetails(productId)).thenReturn(Optional.of(dto));
 
         // When
-        ResultActions resultActions = mockMvc.perform(get("/{productId}/details", productId));
+        ResultActions resultActions = mockMvc.perform(get("/products/{productId}/details", productId));
 
         // Then
         resultActions.andExpect(status().isOk())
@@ -119,7 +119,7 @@ class ProductRestControllerTest {
         when(adapter.getProductDetails(productId)).thenReturn(Optional.empty());
 
         // When
-        ResultActions resultActions = mockMvc.perform(get("/{productId}/details", productId));
+        ResultActions resultActions = mockMvc.perform(get("/products/{productId}/details", productId));
 
         // Then
         resultActions.andExpect(status().isNotFound());
@@ -132,7 +132,7 @@ class ProductRestControllerTest {
         when(adapter.delete(productId)).thenReturn(Response.OK);
 
         // When
-        ResultActions resultActions = mockMvc.perform(delete("/{id}", productId));
+        ResultActions resultActions = mockMvc.perform(delete("/products/{id}", productId));
 
         // Then
         resultActions.andExpect(status().isOk());
@@ -145,7 +145,7 @@ class ProductRestControllerTest {
         when(adapter.delete(productId)).thenReturn(Response.ERROR);
 
         // When
-        ResultActions resultActions = mockMvc.perform(delete("/{id}", productId));
+        ResultActions resultActions = mockMvc.perform(delete("/products/{id}", productId));
 
         // Then
         resultActions.andExpect(status().isInternalServerError());
@@ -158,7 +158,7 @@ class ProductRestControllerTest {
         when(adapter.save(dto)).thenReturn(Response.OK);
 
         // When
-        ResultActions resultActions = mockMvc.perform(post("/").
+        ResultActions resultActions = mockMvc.perform(post("/products").
                 contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(dto)));
 
@@ -173,7 +173,7 @@ class ProductRestControllerTest {
         when(adapter.save(dto)).thenReturn(Response.ERROR);
 
         // When
-        ResultActions resultActions = mockMvc.perform(post("/").
+        ResultActions resultActions = mockMvc.perform(post("/products").
                 contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(dto)));
 
