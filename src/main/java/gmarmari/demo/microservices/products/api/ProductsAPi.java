@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/")
+@RequestMapping("/products")
 @Tag(name = "Product API", description = "Product management API")
 public interface ProductsAPi {
 
