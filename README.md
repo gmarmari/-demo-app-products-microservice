@@ -42,8 +42,8 @@ With this profile a h2 databse will be used.
 
 # Api Docu
 
-* http://localhost:8080/swagger-ui/index.html
-* http://localhost:8080//v3/api-docs/
+* http://localhost:8002/swagger-ui/index.html
+* http://localhost:8002/v3/api-docs/
  
  
 
