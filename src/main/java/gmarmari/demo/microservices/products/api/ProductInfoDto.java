@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-@Schema(name = "ProductDetails_V01")
+@Schema(name = "ProductInfo_V01")
 public class ProductInfoDto {
 
     public final long id;
