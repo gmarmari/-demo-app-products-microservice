@@ -75,8 +75,10 @@ public class ProductUseCase implements ProductService {
 
     @Override
     public void save(ProductDetailsDao productDetails) {
-        productRepository.save(productDetails.product);
+        long productId = productRepository.save(productDetails.product).getId();
+        productDetails.info.setProductId(productId);
         productInfoRepository.save(productDetails.info);
+        productDetails.contact.setProductId(productId);
         productContactRepository.save(productDetails.contact);
     }
 }
