@@ -213,6 +213,7 @@ class ProductUseCaseTest {
     void save() {
         // Given
         ProductDetailsDao productDetails = aProductDetailsDao();
+        when(productRepository.save(productDetails.product)).thenReturn(productDetails.product);
 
         // When
         useCase.save(productDetails);
