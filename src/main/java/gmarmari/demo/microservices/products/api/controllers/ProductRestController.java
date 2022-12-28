@@ -4,7 +4,7 @@ import gmarmari.demo.microservices.products.adapters.ProductAdapter;
 import gmarmari.demo.microservices.products.api.ProductDetailsDto;
 import gmarmari.demo.microservices.products.api.ProductDto;
 import gmarmari.demo.microservices.products.api.ProductNotFoundException;
-import gmarmari.demo.microservices.products.api.ProductsAPi;
+import gmarmari.demo.microservices.products.api.ProductsApi;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-public class ProductRestController implements ProductsAPi {
+public class ProductRestController implements ProductsApi {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductRestController.class);
 
@@ -44,8 +44,19 @@ public class ProductRestController implements ProductsAPi {
         return adapter.getProductsFromIds(productIds);
     }
 
-    public List<ProductDto> getProductsFromIdsFallback(Throwable t) {
-        LOGGER.warn("Fallback method for getProductsFromIds", t);
+    public List<ProductDto> getProductsFromIdsFallback(String productIds, Throwable t) {
+        LOGGER.warn("Fallback method for getProductsFromIds with input: " + productIds, t);
+        return List.of();
+    }
+
+    @Override
+    @CircuitBreaker(name = "breaker", fallbackMethod = "findProductsByNameFallback")
+    public List<ProductDto> findProductsByName(String name) {
+        return adapter.findProductsByName(name);
+    }
+
+    public List<ProductDto> findProductsByNameFallback(String name, Throwable t) {
+        LOGGER.warn("Fallback method for findProductsByName with input: " + name, t);
         return List.of();
     }
 

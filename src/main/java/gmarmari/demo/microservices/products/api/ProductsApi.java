@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequestMapping("/products")
 @Tag(name = "Product API", description = "Product management API")
-public interface ProductsAPi {
+public interface ProductsApi {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
@@ -30,6 +30,15 @@ public interface ProductsAPi {
             description = "List of products from the given product ids"
     )
     List<ProductDto> getProductsFromIds(@PathVariable("productIds") String productIds);
+
+    @GetMapping(path = "/find-by-name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(
+            parameters = {
+                    @Parameter(name = "name", description = "the name of product")
+            },
+            description = "Find all products which name contains the given name"
+    )
+    List<ProductDto> findProductsByName(@PathVariable("name") String name);
 
 
     @GetMapping(path = "/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)

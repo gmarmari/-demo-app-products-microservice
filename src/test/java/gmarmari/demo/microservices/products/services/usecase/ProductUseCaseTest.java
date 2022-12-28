@@ -12,11 +12,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
 
 import static gmarmari.demo.microservices.products.CommonDataFactory.aLong;
+import static gmarmari.demo.microservices.products.CommonDataFactory.aText;
 import static gmarmari.demo.microservices.products.ProductDataFactory.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -66,6 +68,26 @@ class ProductUseCaseTest {
 
         // When
         List<ProductDao> list = useCase.getProductsFromIds(ids);
+
+        // Then
+        assertThat(list).containsExactly(productA, productB, productC);
+        verifyNoMoreInteractions(productRepository);
+        verifyNoInteractions(productInfoRepository);
+        verifyNoInteractions(productContactRepository);
+    }
+
+    @Test
+    void findProductsByName() {
+        // Given
+        String name = aText();
+        ProductDao productA = aProductDao(true);
+        ProductDao productB = aProductDao(true);
+        ProductDao productC = aProductDao(true);
+
+        when(productRepository.findByNameContainingIgnoreCase(name, Sort.by("name").ascending())).thenReturn(List.of(productA, productB, productC));
+
+        // When
+        List<ProductDao> list = useCase.findProductsByName(name);
 
         // Then
         assertThat(list).containsExactly(productA, productB, productC);

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static gmarmari.demo.microservices.products.CommonDataFactory.aLong;
+import static gmarmari.demo.microservices.products.CommonDataFactory.aText;
 import static gmarmari.demo.microservices.products.ProductDataFactory.aProductDetailsDto;
 import static gmarmari.demo.microservices.products.ProductDataFactory.aProductDto;
 import static org.mockito.Mockito.when;
@@ -60,6 +61,22 @@ class ProductRestControllerTest {
 
         // When
         ResultActions resultActions = mockMvc.perform(get("/products/from-ids/{productIds}", productIds));
+
+        // Then
+        resultActions.andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(objectMapper.writeValueAsString(list)));
+    }
+
+    @Test
+    void findProductsByName() throws Exception {
+        // Given
+        String name = aText();
+        List<ProductDto> list = List.of(aProductDto(), aProductDto());
+        when(adapter.findProductsByName(name)).thenReturn(list);
+
+        // When
+        ResultActions resultActions = mockMvc.perform(get("/products/find-by-name/{name}", name));
 
         // Then
         resultActions.andExpect(status().isOk())
