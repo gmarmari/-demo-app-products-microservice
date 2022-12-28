@@ -14,18 +14,14 @@ public class ProductDto {
     @NotBlank
     @Size(max = 100)
     public final String name;
-    @Size()
-    public final int amount;
     @NotNull
     public final PrizeDto prize;
 
     public ProductDto(@JsonProperty("id") long id,
                       @NotNull @JsonProperty("name") String name,
-                      @JsonProperty("amount") int amount,
                       @NotNull @JsonProperty("prize")  PrizeDto prize) {
         this.id = id;
         this.name = name;
-        this.amount = amount;
         this.prize = prize;
     }
 
@@ -34,12 +30,12 @@ public class ProductDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductDto that = (ProductDto) o;
-        return id == that.id && amount == that.amount && Objects.equals(name, that.name) && Objects.equals(prize, that.prize);
+        return id == that.id && Objects.equals(name, that.name) && Objects.equals(prize, that.prize);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, amount, prize);
+        return Objects.hash(id, name, prize);
     }
 
     @Override
@@ -47,7 +43,6 @@ public class ProductDto {
         return "ProductDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", amount=" + amount +
                 ", prize=" + prize +
                 '}';
     }

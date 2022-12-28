@@ -189,7 +189,6 @@ class ProductAdapterTest {
     private void verifyProduct(ProductDto dto, ProductDao dao) {
         assertThat(dto.id).isEqualTo(dao.getId());
         assertThat(dto.name).isEqualTo(dao.getName());
-        assertThat(dto.amount).isEqualTo(dao.getAmount());
         assertThat(dto.prize.amount).isEqualTo(dao.getPrize().amount);
         assertThat(dto.prize.unit.name()).isEqualTo(dao.getPrize().unit.name());
     }

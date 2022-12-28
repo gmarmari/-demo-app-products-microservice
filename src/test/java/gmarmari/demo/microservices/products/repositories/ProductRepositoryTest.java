@@ -37,7 +37,6 @@ class ProductRepositoryTest {
 
         assertThat(result.getId()).isEqualTo(id);
         assertThat(result.getName()).isEqualTo(product.getName());
-        assertThat(result.getAmount()).isEqualTo(product.getAmount());
         assertThat(result.getPrize()).isEqualTo(product.getPrize());
     }
 
