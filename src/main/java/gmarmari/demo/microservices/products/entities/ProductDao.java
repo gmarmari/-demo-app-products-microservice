@@ -17,8 +17,6 @@ public class ProductDao {
     @NotNull
     private String name;
 
-    private int amount;
-
     @NotNull
     @Convert(converter = PrizeConverter.class)
     @Column(name="prize")
@@ -38,14 +36,6 @@ public class ProductDao {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     public PrizeDao getPrize() {
@@ -74,7 +64,6 @@ public class ProductDao {
         return "ProductDao{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", amount=" + amount +
                 ", prize=" + prize +
                 '}';
     }

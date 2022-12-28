@@ -22,7 +22,6 @@ public class ProductDataFactory {
         return new ProductDto(
                 productId,
                 aText(),
-                aInt(),
                 aPrizeDto()
         );
     }
@@ -94,7 +93,6 @@ public class ProductDataFactory {
         }
 
         dao.setName(aText());
-        dao.setAmount(aInt());
         dao.setPrize(aPrizeDao());
         return dao;
     }

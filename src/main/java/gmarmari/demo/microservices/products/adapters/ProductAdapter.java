@@ -70,7 +70,6 @@ public class ProductAdapter {
         return new ProductDto(
                 dao.getId(),
                 dao.getName(),
-                dao.getAmount(),
                 convert(dao.getPrize())
         );
     }
@@ -124,7 +123,6 @@ public class ProductAdapter {
         ProductDao dao = new ProductDao();
         dao.setId(dto.id);
         dao.setName(dto.name);
-        dao.setAmount(dto.amount);
         dao.setPrize(convert(dto.prize));
         return dao;
     }

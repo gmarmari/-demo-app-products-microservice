@@ -9,19 +9,16 @@
 
         <insert tableName="products">
             <column name="name" value="Bio Tee mint (30 pieces)"/>
-            <column name="amount" value="1"/>
             <column name="prize" value="4.50-EURO"/>
         </insert>
 
         <insert tableName="products">
             <column name="name" value="Bio Milk 1 lt"/>
-            <column name="amount" value="2"/>
             <column name="prize" value="1.50-EURO"/>
         </insert>
 
         <insert tableName="products">
             <column name="name" value="Bread 500 grams"/>
-            <column name="amount" value="1"/>
             <column name="prize" value="2.50-EURO"/>
         </insert>
 
