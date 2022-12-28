@@ -1,5 +1,6 @@
 package gmarmari.demo.microservices.products.services;
 
+import gmarmari.demo.microservices.products.api.ProductDto;
 import gmarmari.demo.microservices.products.entities.ProductDao;
 import gmarmari.demo.microservices.products.entities.ProductDetailsDao;
 import gmarmari.demo.microservices.products.entities.ProductDao;
@@ -13,6 +14,8 @@ public interface ProductService {
     List<ProductDao> getProducts();
 
     List<ProductDao> getProductsFromIds(List<Long> productIds);
+
+    List<ProductDao> findProductsByName(String name);
 
     Optional<ProductDao> getProduct(long productId);
 

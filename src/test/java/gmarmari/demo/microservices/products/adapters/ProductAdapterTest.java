@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static gmarmari.demo.microservices.products.CommonDataFactory.aLong;
+import static gmarmari.demo.microservices.products.CommonDataFactory.aText;
 import static gmarmari.demo.microservices.products.ProductDataFactory.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -68,6 +69,28 @@ class ProductAdapterTest {
 
         // When
         List<ProductDto> list = adapter.getProductsFromIds(ids);
+
+        // Then
+        assertThat(list).hasSize(3);
+        verifyProduct(list.get(0), daoA);
+        verifyProduct(list.get(1), daoB);
+        verifyProduct(list.get(2), daoC);
+
+        verifyNoMoreInteractions(service);
+    }
+
+    @Test
+    void findProductsByName() {
+        // Given
+        String name = aText();
+        ProductDao daoA = aProductDao(true);
+        ProductDao daoB = aProductDao(true);
+        ProductDao daoC = aProductDao(true);
+
+        when(service.findProductsByName(name)).thenReturn(List.of(daoA, daoB, daoC));
+
+        // When
+        List<ProductDto> list = adapter.findProductsByName(name);
 
         // Then
         assertThat(list).hasSize(3);

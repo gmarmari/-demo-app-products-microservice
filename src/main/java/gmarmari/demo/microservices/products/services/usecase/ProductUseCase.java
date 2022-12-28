@@ -9,6 +9,7 @@ import gmarmari.demo.microservices.products.repositories.ProductInfoRepository;
 import gmarmari.demo.microservices.products.repositories.ProductRepository;
 import gmarmari.demo.microservices.products.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,8 @@ import java.util.Optional;
 @Service
 @Transactional
 public class ProductUseCase implements ProductService {
+
+    private static final Sort SORT_BY_NAME = Sort.by("name").ascending();
 
     private final ProductRepository productRepository;
     private final ProductInfoRepository productInfoRepository;
@@ -40,6 +43,11 @@ public class ProductUseCase implements ProductService {
     @Override
     public List<ProductDao> getProductsFromIds(List<Long> productIds) {
         return productRepository.findAllById(productIds);
+    }
+
+    @Override
+    public List<ProductDao> findProductsByName(String name) {
+        return productRepository.findByNameContainingIgnoreCase(name, SORT_BY_NAME);
     }
 
     @Override

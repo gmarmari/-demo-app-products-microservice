@@ -36,6 +36,12 @@ public class ProductAdapter {
                 .collect(Collectors.toList());
     }
 
+    public List<ProductDto> findProductsByName(String name) {
+        return service.findProductsByName(name).stream()
+                .map(this::convert)
+                .collect(Collectors.toList());
+    }
+
     public Optional<ProductDto> getProduct(long productId) {
         return service.getProduct(productId).map(this::convert);
     }
