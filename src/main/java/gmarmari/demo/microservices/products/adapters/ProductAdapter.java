@@ -4,6 +4,8 @@ import gmarmari.demo.microservices.products.api.*;
 import gmarmari.demo.microservices.products.entities.*;
 import gmarmari.demo.microservices.products.services.ProductService;
 import gmarmari.demo.microservices.products.services.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class ProductAdapter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductAdapter.class);
 
     private final ProductService service;
 
@@ -55,6 +59,7 @@ public class ProductAdapter {
             service.delete(productId);
             return Response.OK;
         } catch (Exception e) {
+            LOGGER.error("Error deleting product with id: " + productId, e);
             return Response.ERROR;
         }
     }
@@ -64,6 +69,7 @@ public class ProductAdapter {
             service.save(convert(productDetails));
             return Response.OK;
         } catch (Exception e) {
+            LOGGER.error("Error saving product details", e);
             return Response.ERROR;
         }
     }
