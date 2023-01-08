@@ -14,7 +14,7 @@ services:
       - default
       - demo-app-network
     volumes:
-      - "./log:/app/log"
+      - "log:/app/log"
     ports:
       - "8002:8002"
     depends_on:
@@ -34,6 +34,7 @@ services:
 
 volumes:
   db-data:
+  log:
 
 networks:
   demo-app-network:
